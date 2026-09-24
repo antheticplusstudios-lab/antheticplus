@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790066417048,
+      "tag": "0000_create_profiles_automations_payments",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790130401494,
+      "tag": "0001_phase1_client_portal_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790130401495,
+      "tag": "0002_grant_data_api_roles",
+      "breakpoints": true
+    }
+  ]
+}
