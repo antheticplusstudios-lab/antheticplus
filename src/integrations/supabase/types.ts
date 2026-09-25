@@ -524,6 +524,8 @@ export type Database = {
       pricing_plans: {
         Row: {
           active: boolean
+          description: string
+          listed: boolean
           monthly_price: number
           name: string
           slug: string
@@ -532,6 +534,8 @@ export type Database = {
         }
         Insert: {
           active?: boolean
+          description?: string
+          listed?: boolean
           monthly_price?: number
           name: string
           slug: string
@@ -540,6 +544,8 @@ export type Database = {
         }
         Update: {
           active?: boolean
+          description?: string
+          listed?: boolean
           monthly_price?: number
           name?: string
           slug?: string
