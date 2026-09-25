@@ -12,7 +12,6 @@ import {
   useInviteStaff,
   useRevokeStaff,
   useRoles,
-  useWipeDatabase,
 } from "@/hooks/use-admin";
 import { useCurrentUser, useRole } from "@/hooks/use-portal";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,12 +37,10 @@ function TeamManagement() {
   const { data: myRole } = useRole();
   const inviteStaff = useInviteStaff();
   const revokeStaff = useRevokeStaff();
-  const wipeDatabase = useWipeDatabase();
   const queryClient = useQueryClient();
 
   const [email, setEmail] = useState("");
   const [role, setRole] = useState<"partner" | "verifier" | "admin">("verifier");
-  const [wipeConfirm, setWipeConfirm] = useState("");
   const [filter, setFilter] = useState("");
 
   if (rolesLoading || invitesLoading || profilesLoading || auditLoading) return <Loading />;
@@ -157,31 +154,6 @@ function TeamManagement() {
         </Panel>
       </div>
 
-      {myRole === "owner" && (
-        <Panel title="Danger zone" description="Owner only">
-          <div className="rounded-2xl border border-destructive/30 bg-destructive/8 p-4">
-            <p className="text-sm font-bold text-destructive">Wipe client data</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Removes automation instances, payments, transcripts, usage logs and client profiles. Staff accounts,
-              Groq keys and global prompts are preserved. This cannot be undone.
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <TextField
-                value={wipeConfirm}
-                onChange={(e) => setWipeConfirm(e.target.value)}
-                placeholder="Type WIPE to confirm"
-                className="max-w-xs"
-              />
-              <DangerButton
-                disabled={wipeConfirm !== "WIPE" || wipeDatabase.isPending}
-                onClick={() => wipeDatabase.mutate({ confirm: wipeConfirm }, { onSuccess: () => setWipeConfirm("") })}
-              >
-                Wipe client data
-              </DangerButton>
-            </div>
-          </div>
-        </Panel>
-      )}
 
       <Panel
         title="Audit trail (immutable)"

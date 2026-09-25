@@ -12,7 +12,6 @@ import {
   revokeStaff,
   runLifecycle,
   updateGroqKey,
-  wipeDatabase,
 } from "@/lib/admin.functions";
 
 type LooseResult = { data: unknown[] | null; error: { message: string } | null };
@@ -85,7 +84,6 @@ export const useReviewPayment = () =>
 export const useProvisionAutomation = () =>
   useAction<{ automationId: string }>(provisionAutomation, "Automation deployed");
 export const useRunLifecycle = () => useAction<Record<string, never>>(runLifecycle, "Lifecycle check complete");
-export const useWipeDatabase = () => useAction<{ confirm: string }>(wipeDatabase, "Client data wiped");
 export const useCreateGroqKey = () =>
   useAction<{ label: string; keyValue: string; isPrimary: boolean }>(createGroqKey, "Key added to the pool");
 export const useUpdateGroqKey = () =>
