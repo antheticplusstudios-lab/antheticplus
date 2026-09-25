@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Bot, ChevronLeft, CreditCard, LayoutDashboard, LogOut, Menu, ShieldCheck, UserRound } from "lucide-react";
 import { useState, type ReactNode } from "react";
-import { Brand } from "@/components/brand";
+import { HomeBrand } from "@/components/home-brand";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser, useRole } from "@/hooks/use-portal";
@@ -28,7 +28,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
         className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-background p-4 transition-transform lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="mb-8 flex items-center justify-between">
-          <Brand />
+          <HomeBrand />
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen(false)}>
             <ChevronLeft />
           </Button>

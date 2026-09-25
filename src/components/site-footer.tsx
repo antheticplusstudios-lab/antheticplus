@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Activity, Lock, ShieldCheck, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Brand } from "@/components/brand";
+import { HomeBrand } from "@/components/home-brand";
 import { Reveal } from "@/components/motion";
 
 const suite = [
@@ -55,7 +55,7 @@ export function SiteFooter() {
       <Reveal className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <Brand />
+            <HomeBrand />
             <p className="max-w-xs text-sm text-muted-foreground">
               Autonomous front-office systems for businesses that never want to miss a customer.
             </p>
