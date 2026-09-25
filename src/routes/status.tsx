@@ -33,9 +33,9 @@ function Dot({ ok }: { ok: boolean }) {
   return (
     <span className="relative flex h-2.5 w-2.5">
       <span
-        className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-70 ${ok ? "bg-emerald-500" : "bg-amber-500"}`}
+        className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-70 ${ok ? "bg-success" : "bg-foreground"}`}
       />
-      <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${ok ? "bg-emerald-500" : "bg-amber-500"}`} />
+      <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${ok ? "bg-success" : "bg-foreground"}`} />
     </span>
   );
 }
@@ -91,8 +91,8 @@ function StatusPage() {
             </Button>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4">
-            <p className="flex items-center gap-2 font-bold text-emerald-700 dark:text-emerald-400">
+          <div className="mt-6 rounded-2xl border border-success/30 bg-success/10 px-5 py-4">
+            <p className="flex items-center gap-2 font-bold text-success">
               {allOk ? <CheckCircle2 className="h-5 w-5" /> : <CircleAlert className="h-5 w-5" />}
               {allOk ? "99.98% uptime over the last 90 days" : "Degraded performance detected"}
             </p>

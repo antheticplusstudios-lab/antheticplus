@@ -62,7 +62,7 @@ function Page() {
                 </p>
               </div>
               {item.status === "pending_payment" ? (
-                <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/12 px-4 py-2 text-sm font-bold text-amber-600 dark:text-amber-400">
+                <span className="inline-flex items-center gap-2 rounded-full bg-foreground/12 px-4 py-2 text-sm font-bold text-foreground">
                   <Clock className="h-4 w-4" />
                   Pending verification
                 </span>

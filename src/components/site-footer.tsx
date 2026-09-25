@@ -34,11 +34,11 @@ export function StatusPill() {
   return (
     <Link
       to="/status"
-      className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 transition-colors hover:bg-emerald-500/20 dark:text-emerald-400"
+      className="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-xs font-semibold text-success transition-colors hover:bg-success/20 dark:text-success"
     >
       <span className="relative flex h-2 w-2">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
       </span>
       99.98% Operational
     </Link>

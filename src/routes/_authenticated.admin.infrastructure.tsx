@@ -124,11 +124,11 @@ function InfrastructurePage() {
         description="Owner and Partner copilot. Your OpenRouter key stays on the server — only a masked hint is shown here."
         actions={
           assistant.data?.configured ? (
-            <span className="rounded-full bg-emerald-500/12 px-2.5 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="rounded-full bg-success/12 px-2.5 py-1 text-xs font-bold text-success">
               Connected {assistant.data.hint}
             </span>
           ) : (
-            <span className="rounded-full bg-amber-500/12 px-2.5 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
+            <span className="rounded-full bg-foreground/12 px-2.5 py-1 text-xs font-bold text-foreground">
               Key required
             </span>
           )

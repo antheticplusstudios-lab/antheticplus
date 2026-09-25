@@ -64,13 +64,13 @@ function AdminCommandCenter() {
   const urgentItems: { icon: React.ReactNode; text: string; to: string }[] = [];
   if (pendingPayments.length)
     urgentItems.push({
-      icon: <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />,
+      icon: <AlertTriangle className="h-4 w-4 text-foreground" />,
       text: `${pendingPayments.length} payment${pendingPayments.length === 1 ? "" : "s"} awaiting verification`,
       to: "/admin/verification",
     });
   if (expiringSoon.length)
     urgentItems.push({
-      icon: <TimerReset className="h-4 w-4 text-amber-600 dark:text-amber-400" />,
+      icon: <TimerReset className="h-4 w-4 text-foreground" />,
       text: `${expiringSoon.length} automation${expiringSoon.length === 1 ? "" : "s"} expiring within 5 days`,
       to: "/admin/automations",
     });
@@ -88,7 +88,7 @@ function AdminCommandCenter() {
     });
   if (awaitingSetup.length)
     urgentItems.push({
-      icon: <UserCheck className="h-4 w-4 text-amber-600 dark:text-amber-400" />,
+      icon: <UserCheck className="h-4 w-4 text-foreground" />,
       text: `${awaitingSetup.length} instance${awaitingSetup.length === 1 ? "" : "s"} paid but awaiting setup`,
       to: "/admin/creator",
     });

@@ -132,10 +132,10 @@ function Checkout() {
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-3xl border border-amber-500/40 bg-card p-8 text-center shadow-xl"
+          className="rounded-3xl border border-foreground/40 bg-card p-8 text-center shadow-xl"
         >
-          <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-amber-500/15">
-            <TriangleAlert className="h-6 w-6 text-amber-600 dark:text-amber-400" />
+          <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-foreground/15">
+            <TriangleAlert className="h-6 w-6 text-foreground" />
           </div>
           <h1 className="mt-5 text-2xl font-extrabold">Complete your profile first</h1>
           <p className="mt-2 text-sm text-muted-foreground">

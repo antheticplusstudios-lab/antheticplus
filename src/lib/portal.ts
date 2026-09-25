@@ -39,10 +39,10 @@ export function statusClass(status: string) {
     case "paid":
     case "active":
     case "approved":
-      return "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400";
+      return "bg-success/12 text-success";
     case "pending_payment":
     case "pending":
-      return "bg-amber-500/12 text-amber-600 dark:text-amber-400";
+      return "bg-foreground/12 text-foreground";
     case "rejected":
     case "revoked":
     case "suspended":
