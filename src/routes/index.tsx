@@ -113,7 +113,9 @@ const faqs = [
 
 function Index() {
   const { data: plans } = useSuspenseQuery(livePricingQueryOptions);
-  const items = withLivePricing(plans);
+  // Homepage showcases only these two; all other automations stay fully active in dashboards/admin.
+  const HOMEPAGE_SLUGS = ["voice-sms-receptionist", "social-dm-assistant"];
+  const items = withLivePricing(plans).filter((i) => HOMEPAGE_SLUGS.includes(i.slug));
   const [yearly, setYearly] = useState(false);
 
   return (
