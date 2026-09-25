@@ -37,3 +37,11 @@
 - OpenRouter API key (paste on Infrastructure → AI assistant)
 - Groq API keys for the pool
 - Email sending domain choice before client emails go out
+
+## Phase 5 — Specialized refactor (approved plan)
+- [x] Homepage shows only AI Receptionist + Social DM agent (others stay live in dashboards/admin)
+- [x] Fix white flash on refresh (theme applied before first paint)
+- [x] AI key management (Groq pool, OpenRouter key) owner-only in app + menu
+- [ ] Owner-only database rules on key tables — blocked: migration tool replays old files on the remixed database
+- [ ] One-click approve = crawl + script compile + provisioning
+- [ ] Per-automation pages, 10-task configurator, script auto-regeneration, OpenRouter failover, usage metering, Google integrations, flow tests

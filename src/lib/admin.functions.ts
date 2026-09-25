@@ -72,7 +72,7 @@ export const runLifecycle = createServerFn({ method: "POST" })
 export const listGroqKeys = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     const { data, error } = await context.supabase
       .from("groq_keys")
       .select(
@@ -95,7 +95,7 @@ export const createGroqKey = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     const hint = `${data.keyValue.slice(0, 6)}…${data.keyValue.slice(-4)}`;
     if (data.isPrimary) await context.supabase.from("groq_keys").update({ is_primary: false }).eq("is_primary", true);
     const { error } = await context.supabase.from("groq_keys").insert({
@@ -121,7 +121,7 @@ export const updateGroqKey = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     if (data.makePrimary) await context.supabase.from("groq_keys").update({ is_primary: false }).eq("is_primary", true);
     const patch: { enabled?: boolean; is_primary?: boolean; cooldown_until?: string | null } = {};
     if (typeof data.enabled === "boolean") patch.enabled = data.enabled;
@@ -138,7 +138,7 @@ export const deleteGroqKey = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
   .handler(async ({ data, context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     const { error } = await context.supabase.from("groq_keys").delete().eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };

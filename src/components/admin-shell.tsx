@@ -33,7 +33,7 @@ export const adminNav = [
   { label: "Client CRM & Tags", to: "/admin/crm", icon: Tags, roles: ["owner", "partner"] },
   { label: "Subscription Lifecycle", to: "/admin/lifecycle", icon: Clock, roles: ["owner", "partner"] },
   { label: "Pricing Configurator", to: "/admin/pricing", icon: Sparkles, roles: ["owner", "partner"] },
-  { label: "Infrastructure & Groq Pool", to: "/admin/infrastructure", icon: ServerCog, roles: ["owner", "partner"] },
+  { label: "Infrastructure & Groq Pool", to: "/admin/infrastructure", icon: ServerCog, roles: ["owner"] },
   { label: "Team & Audit Trail", to: "/admin/team", icon: Users, roles: ["owner", "partner"] },
 ] as const;
 

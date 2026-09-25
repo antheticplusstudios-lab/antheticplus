@@ -113,7 +113,9 @@ const faqs = [
 
 function Index() {
   const { data: plans } = useSuspenseQuery(livePricingQueryOptions);
-  const items = withLivePricing(plans);
+  // Homepage showcases only these two; all other automations stay fully active in dashboards/admin.
+  const HOMEPAGE_SLUGS = ["voice-sms-receptionist", "social-dm-assistant"];
+  const items = withLivePricing(plans).filter((i) => HOMEPAGE_SLUGS.includes(i.slug));
   const [yearly, setYearly] = useState(false);
 
   return (
@@ -199,7 +201,7 @@ function Index() {
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-2xl">
-                <p className="text-sm font-bold uppercase tracking-wide text-primary">Six core systems</p>
+                <p className="text-sm font-bold uppercase tracking-wide text-primary">Flagship systems</p>
                 <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
                   Pick the moment you want covered.
                 </h2>
