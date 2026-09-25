@@ -67,16 +67,6 @@ export const runLifecycle = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-export const wipeDatabase = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => z.object({ confirm: z.string() }).parse(input))
-  .handler(async ({ data, context }) => {
-    await assertOwner(context);
-    if (data.confirm !== "WIPE") throw new Error('Type WIPE to confirm this action.');
-    const { error } = await context.supabase.rpc("wipe_client_data");
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
 
 /** Groq key values are never returned to the browser — only a masked hint. */
 export const listGroqKeys = createServerFn({ method: "GET" })
