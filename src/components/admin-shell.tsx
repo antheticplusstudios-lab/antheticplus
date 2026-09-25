@@ -47,7 +47,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const initial = (user?.email ?? "A").charAt(0).toUpperCase();
 
   return (
-    <div className="min-h-screen bg-muted/25">
+    <div className="min-h-screen bg-background">
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-border bg-background p-4 transition-transform lg:translate-x-0",
