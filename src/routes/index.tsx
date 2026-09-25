@@ -19,7 +19,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { livePricingQueryOptions, withLivePricing } from "@/lib/pricing";
+import { livePricingQueryOptions, storefrontItems } from "@/lib/pricing";
 import { money } from "@/components/admin-ui";
 
 export const Route = createFileRoute("/")({
@@ -114,8 +114,7 @@ const faqs = [
 function Index() {
   const { data: plans } = useSuspenseQuery(livePricingQueryOptions);
   // Homepage showcases only these two; all other automations stay fully active in dashboards/admin.
-  const HOMEPAGE_SLUGS = ["voice-sms-receptionist", "social-dm-assistant"];
-  const items = withLivePricing(plans).filter((i) => HOMEPAGE_SLUGS.includes(i.slug));
+  const items = storefrontItems(plans);
   const [yearly, setYearly] = useState(false);
 
   return (

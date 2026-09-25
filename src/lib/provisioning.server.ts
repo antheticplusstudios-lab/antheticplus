@@ -61,7 +61,7 @@ export async function runProvisioningPipeline(admin: SupabaseClient, paymentId: 
       .eq("id", automationId);
   }
 
-  const snippet = `<script src="${origin}/api/public/widget/script?client=${inst.client_id}" data-token="${inst.script_token}" async></script>`;
+  const snippet = `<script src="${origin}/api/public/widget/script?token=${inst.script_token}" data-client-id="${inst.client_id}" defer></script>`;
   await admin.from("audit_log").insert({
     actor_id: actorId,
     action: "automation_one_click_provisioned",

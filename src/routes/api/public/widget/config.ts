@@ -16,7 +16,7 @@ export const Route = createFileRoute("/api/public/widget/config")({
         );
         const instance = await resolveTenant(admin, token);
         if (!instance) return fail("Unknown or expired widget token", 404);
-        if (!originAllowed(instance, request.headers.get("origin"))) return fail("Origin not authorised", 403);
+        if (!originAllowed(instance, request.headers.get("origin"), new URL(request.url).host)) return fail("Origin not authorised", 403);
         if (!(await isActive(instance))) return fail("This automation is not active", 403);
 
         return json({

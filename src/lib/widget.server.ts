@@ -47,13 +47,15 @@ function hostOf(raw: string) {
  * Origin gate: the widget only answers for the domain recorded on the account,
  * so a copied snippet cannot run anywhere else.
  */
-export function originAllowed(instance: WidgetInstance, origin: string | null) {
+export function originAllowed(instance: WidgetInstance, origin: string | null, appHost?: string) {
   if (!origin) return false;
+  // The owner's own app (dashboard "Test your receptionist" panel) may always talk to the widget.
+  if (appHost && hostOf(origin) === hostOf(`https://${appHost}`)) return true;
   return hostOf(origin) === hostOf(instance.website_domain);
 }
 
 export async function resolveTenant(admin: Admin, token: string) {
-  if (!/^[a-f0-9-]{8,64}$/i.test(token)) return null;
+  if (!/^[a-z0-9_-]{8,80}$/i.test(token)) return null;
   const { data, error } = await admin.from("automation_instances").select("*").eq("script_token", token).limit(1);
   const first = data?.[0];
   if (error || !first) return null;

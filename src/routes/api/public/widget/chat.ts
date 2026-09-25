@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
+import { routeChat } from "@/lib/llm-router.server";
 import { fail, isActive, json, originAllowed, preflight, resolveTenant, systemPrompt, takeTokenBucket } from "@/lib/widget.server";
 
 export const Route = createFileRoute("/api/public/widget/chat")({
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/api/public/widget/chat")({
 
         const instance = await resolveTenant(admin, body.token);
         if (!instance) return fail("Unknown or expired widget token", 404);
-        if (!originAllowed(instance, request.headers.get("origin"))) return fail("Origin not authorised", 403);
+        if (!originAllowed(instance, request.headers.get("origin"), new URL(request.url).host)) return fail("Origin not authorised", 403);
         if (!(await isActive(instance))) return fail("This automation is not active", 403);
 
         const bucket = await takeTokenBucket(admin, instance.id);
@@ -35,29 +36,14 @@ export const Route = createFileRoute("/api/public/widget/chat")({
           content: m.content,
         }));
 
-        const gatewayResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env["LOVABLE_API_KEY"]}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "google/gemini-2.5-flash",
-            messages: [{ role: "system", content: system }, ...history, { role: "user", content: body.message }],
-            max_tokens: 500,
-            temperature: 0.4,
-          }),
-          signal: AbortSignal.timeout(30_000),
-        });
-
-        if (!gatewayResponse.ok) {
-          return fail("The assistant is temporarily unavailable. Please try again shortly.", 502);
-        }
-
-        const payload = (await gatewayResponse.json()) as {
-          choices?: { message?: { content?: string } }[];
-        };
-        const reply = payload.choices?.[0]?.message?.content?.trim() ?? "";
+        const routed = await routeChat(admin, [
+          { role: "system", content: system },
+          ...(history as { role: "user" | "assistant"; content: string }[]),
+          { role: "user", content: body.message },
+        ]);
+        if (!routed) return fail("The assistant is temporarily unavailable. Please try again shortly.", 502);
+        const reply = routed.reply;
+        await admin.from("usage_logs").insert({ automation_id: instance.id, model: routed.model, tokens_in: routed.tokensIn, tokens_out: routed.tokensOut });
         if (!reply) return fail("The assistant returned an empty reply.", 502);
 
         // Persist the transcript so the client dashboard and staff queue can audit it.
