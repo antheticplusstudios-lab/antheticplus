@@ -79,8 +79,22 @@ function useAction<TArgs>(fn: (...args: any[]) => Promise<any>, verb: string) {
   });
 }
 
-export const useReviewPayment = () =>
-  useAction<{ paymentId: string; approve: boolean; reason: string }>(reviewPayment, "Decision recorded");
+export const useReviewPayment = () => {
+  const queryClient = useQueryClient();
+  const call = useServerFn(reviewPayment as any);
+  return useMutation({
+    mutationFn: (args: { paymentId: string; approve: boolean; reason: string }) => call({ data: args } as any),
+    onSuccess: (res: any, args) => {
+      if (args.approve) {
+        toast.success("Approved & deployed", {
+          description: `Automation activated, expiry extended, script compiled${res?.crawled ? ", website crawled" : " (website crawl couldn't reach the site)"}.`,
+        });
+      } else toast.success("Payment rejected");
+      void queryClient.invalidateQueries();
+    },
+    onError: (error: Error) => toast.error(error.message || "Action failed"),
+  });
+};
 export const useProvisionAutomation = () =>
   useAction<{ automationId: string }>(provisionAutomation, "Automation deployed");
 export const useRunLifecycle = () => useAction<Record<string, never>>(runLifecycle, "Lifecycle check complete");
