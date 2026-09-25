@@ -7,6 +7,7 @@ export type LivePlan = {
   monthly_price: number;
   yearly_discount_pct: number;
   active: boolean;
+  listed?: boolean;
 };
 
 /**
@@ -30,7 +31,7 @@ export const getLivePricing = createServerFn({ method: "GET" }).handler(async ()
   });
   const { data, error } = await supabasePublic
     .from("pricing_plans")
-    .select("slug, monthly_price, yearly_discount_pct, active")
+    .select("slug, monthly_price, yearly_discount_pct, active, listed")
     .eq("active", true);
   if (error) throw new Error(error.message);
   return (data ?? []) as LivePlan[];

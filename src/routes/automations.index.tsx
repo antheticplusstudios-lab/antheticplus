@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { AutomationCard } from "@/components/automation-card";
-import { livePricingQueryOptions, withLivePricing } from "@/lib/pricing";
+import { livePricingQueryOptions, storefrontItems } from "@/lib/pricing";
 
 export const Route = createFileRoute("/automations/")({
   loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(livePricingQueryOptions),
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/automations/")({
 
 function AutomationsPage() {
   const { data } = useSuspenseQuery(livePricingQueryOptions);
-  const items = withLivePricing(data);
+  const items = storefrontItems(data);
   const [yearly, setYearly] = useState(false);
   return (
     <div className="min-h-screen bg-background">

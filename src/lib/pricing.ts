@@ -16,7 +16,7 @@ export function useLivePricing() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("pricing_plans")
-        .select("slug, monthly_price, yearly_discount_pct, active")
+        .select("slug, monthly_price, yearly_discount_pct, active, listed")
         .eq("active", true);
       if (error) throw error;
       return (data ?? []) as LivePlan[];
@@ -37,6 +37,7 @@ export type PricedAutomation = {
   yearlyDiscountPct: number;
   yearlyPrice: number;
   monthlyOf(yearly: boolean): number;
+  listed: boolean;
 };
 
 export function priceOf(plan: LivePlan) {
@@ -50,6 +51,8 @@ export function priceOf(plan: LivePlan) {
     yearlyTotal: monthlyWhenYearly * 12,
   };
 }
+
+const STOREFRONT_DEFAULT = ["voice-sms-receptionist", "social-dm-assistant"];
 
 /** Merge the marketing catalog (copy, icons, features) with the live database prices. */
 export function withLivePricing(plans: LivePlan[] | undefined): PricedAutomation[] {
@@ -65,6 +68,7 @@ export function withLivePricing(plans: LivePlan[] | undefined): PricedAutomation
       yearlyDiscountPct,
       yearlyPrice: monthlyWhenYearly * 12,
       monthlyOf: (yearly: boolean) => (yearly ? monthlyWhenYearly : monthlyBase),
+      listed: plan ? plan.listed !== false && plan.active : STOREFRONT_DEFAULT.includes(item.slug),
     };
   });
 }
@@ -78,4 +82,9 @@ export function withDiscount(amount: number, percentOff: number | null) {
   if (!percentOff) return { amount, saved: 0 };
   const next = Math.round(amount * (1 - percentOff / 100));
   return { amount: next, saved: amount - next };
+}
+
+/** Automations visitors see in public lists (owner toggles "Show on website" in the admin catalog). */
+export function storefrontItems(plans: LivePlan[] | undefined) {
+  return withLivePricing(plans).filter((i) => i.listed);
 }
