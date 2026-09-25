@@ -37,7 +37,14 @@ export const reviewPayment = createServerFn({ method: "POST" })
       _reason: data.reason ?? "",
     });
     if (error) throw new Error(error.message);
-    return { ok: true };
+    if (!data.approve) return { ok: true, crawled: false, snippet: "" };
+    // Approval = provision + crawl + compile script + activate + extend expiry, in one click.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { runProvisioningPipeline } = await import("./provisioning.server");
+    const { getRequest } = await import("@tanstack/react-start/server");
+    const origin = new URL(getRequest().url).origin;
+    const result = await runProvisioningPipeline(supabaseAdmin as never, data.paymentId, context.userId, origin);
+    return { ok: true, ...result };
   });
 
 export const provisionAutomation = createServerFn({ method: "POST" })
