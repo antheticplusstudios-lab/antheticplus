@@ -2,7 +2,6 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Bot, ChevronLeft, CreditCard, LayoutDashboard, LogOut, Menu, ShieldCheck, UserRound } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { HomeBrand } from "@/components/home-brand";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser, useRole } from "@/hooks/use-portal";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,7 +71,6 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <Menu />
           </Button>
           <div className="ml-auto flex items-center gap-2">
-            <ThemeToggle />
             <Button variant="ghost" size="icon" title="Sign out" onClick={() => void supabase.auth.signOut()}>
               <LogOut />
             </Button>

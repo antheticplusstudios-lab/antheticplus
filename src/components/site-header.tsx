@@ -3,7 +3,6 @@ import { LayoutDashboard, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AuthDialog } from "@/components/auth-dialog";
 import { HomeBrand } from "@/components/home-brand";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { AnimatePresence, motion } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-portal";
@@ -102,7 +101,6 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-1.5">
-            <ThemeToggle />
             {!isLoading &&
               (signedIn ? (
                 <Button asChild size="sm" className="hidden rounded-full sm:inline-flex">
