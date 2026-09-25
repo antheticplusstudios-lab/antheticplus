@@ -121,9 +121,9 @@ function Index() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-background">
       <SiteHeader />
-      <main className="page-enter">
+      <main className="page-enter -mt-20">
         {/* Hero */}
-        <section className="relative border-b border-border px-4 pb-20 pt-14 sm:px-6 sm:pb-28 sm:pt-20">
+        <section className="relative border-b border-border px-4 pb-20 pt-32 sm:px-6 sm:pb-28 sm:pt-40">
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_-10%,color-mix(in_oklab,var(--primary)_20%,transparent),transparent_45%)]" />
           <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_.95fr]">
             <div>
