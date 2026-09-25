@@ -33,7 +33,7 @@ function mask(value: string) {
 export const assistantStatus = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    await assertOwner(context);
+    await assertAdmin(context);
     const key = await readSecret(context, KEY_SECRET);
     const model = (await readSecret(context, MODEL_SECRET)) || DEFAULT_MODEL;
     return { configured: key.length > 0, hint: key ? mask(key) : "", model };
