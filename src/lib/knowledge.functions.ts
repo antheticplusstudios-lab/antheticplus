@@ -92,8 +92,8 @@ export const saveKnowledgeDraft = createServerFn({ method: "POST" })
     await context.supabase.from("audit_log").insert({
       actor_id: context.userId,
       action: "knowledge_draft_saved",
-      target_type: "automation",
-      target_id: data.automationId,
+      target: data.automationId,
+      details: { title: data.title },
     } as any);
     return { ok: true };
   });
