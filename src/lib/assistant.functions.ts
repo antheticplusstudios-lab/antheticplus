@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { assertAdmin } from "./rbac.server";
+import { assertAdmin, assertOwner } from "./rbac.server";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const DEFAULT_MODEL = "openai/gpt-4o-mini";
@@ -33,7 +33,7 @@ function mask(value: string) {
 export const assistantStatus = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     const key = await readSecret(context, KEY_SECRET);
     const model = (await readSecret(context, MODEL_SECRET)) || DEFAULT_MODEL;
     return { configured: key.length > 0, hint: key ? mask(key) : "", model };
@@ -51,7 +51,7 @@ export const saveAssistantSettings = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    await assertAdmin(context);
+    await assertOwner(context);
     if (data.clearKey) {
       await context.supabase.from("app_secrets").delete().eq("key", KEY_SECRET);
     } else if (data.keyValue && data.keyValue.trim().length >= 8) {
