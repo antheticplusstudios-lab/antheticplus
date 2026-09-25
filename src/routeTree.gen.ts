@@ -24,6 +24,7 @@ import { Route as AuthenticatedAdminAutomationsRouteImport } from './routes/_aut
 import { Route as AuthenticatedAdminCreatorRouteImport } from './routes/_authenticated.admin.creator'
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated.admin.crm'
 import { Route as AuthenticatedAdminInfrastructureRouteImport } from './routes/_authenticated.admin.infrastructure'
+import { Route as AuthenticatedAdminKnowledgeRouteImport } from './routes/_authenticated.admin.knowledge'
 import { Route as AuthenticatedAdminLifecycleRouteImport } from './routes/_authenticated.admin.lifecycle'
 import { Route as AuthenticatedAdminOrdersRouteImport } from './routes/_authenticated.admin.orders'
 import { Route as AuthenticatedAdminPricingRouteImport } from './routes/_authenticated.admin.pricing'
@@ -115,6 +116,12 @@ const AuthenticatedAdminInfrastructureRoute =
   AuthenticatedAdminInfrastructureRouteImport.update({
     id: '/infrastructure',
     path: '/infrastructure',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminKnowledgeRoute =
+  AuthenticatedAdminKnowledgeRouteImport.update({
+    id: '/knowledge',
+    path: '/knowledge',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
 const AuthenticatedAdminLifecycleRoute =
@@ -218,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/admin/creator': typeof AuthenticatedAdminCreatorRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/infrastructure': typeof AuthenticatedAdminInfrastructureRoute
+  '/admin/knowledge': typeof AuthenticatedAdminKnowledgeRoute
   '/admin/lifecycle': typeof AuthenticatedAdminLifecycleRoute
   '/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
@@ -247,6 +255,7 @@ export interface FileRoutesByTo {
   '/admin/creator': typeof AuthenticatedAdminCreatorRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/infrastructure': typeof AuthenticatedAdminInfrastructureRoute
+  '/admin/knowledge': typeof AuthenticatedAdminKnowledgeRoute
   '/admin/lifecycle': typeof AuthenticatedAdminLifecycleRoute
   '/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
@@ -280,6 +289,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/creator': typeof AuthenticatedAdminCreatorRoute
   '/_authenticated/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/_authenticated/admin/infrastructure': typeof AuthenticatedAdminInfrastructureRoute
+  '/_authenticated/admin/knowledge': typeof AuthenticatedAdminKnowledgeRoute
   '/_authenticated/admin/lifecycle': typeof AuthenticatedAdminLifecycleRoute
   '/_authenticated/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/_authenticated/admin/pricing': typeof AuthenticatedAdminPricingRoute
@@ -313,6 +323,7 @@ export interface FileRouteTypes {
     | '/admin/creator'
     | '/admin/crm'
     | '/admin/infrastructure'
+    | '/admin/knowledge'
     | '/admin/lifecycle'
     | '/admin/orders'
     | '/admin/pricing'
@@ -342,6 +353,7 @@ export interface FileRouteTypes {
     | '/admin/creator'
     | '/admin/crm'
     | '/admin/infrastructure'
+    | '/admin/knowledge'
     | '/admin/lifecycle'
     | '/admin/orders'
     | '/admin/pricing'
@@ -374,6 +386,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/creator'
     | '/_authenticated/admin/crm'
     | '/_authenticated/admin/infrastructure'
+    | '/_authenticated/admin/knowledge'
     | '/_authenticated/admin/lifecycle'
     | '/_authenticated/admin/orders'
     | '/_authenticated/admin/pricing'
@@ -513,6 +526,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminInfrastructureRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/knowledge': {
+      id: '/_authenticated/admin/knowledge'
+      path: '/knowledge'
+      fullPath: '/admin/knowledge'
+      preLoaderRoute: typeof AuthenticatedAdminKnowledgeRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/lifecycle': {
       id: '/_authenticated/admin/lifecycle'
       path: '/lifecycle'
@@ -626,6 +646,7 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCreatorRoute: typeof AuthenticatedAdminCreatorRoute
   AuthenticatedAdminCrmRoute: typeof AuthenticatedAdminCrmRoute
   AuthenticatedAdminInfrastructureRoute: typeof AuthenticatedAdminInfrastructureRoute
+  AuthenticatedAdminKnowledgeRoute: typeof AuthenticatedAdminKnowledgeRoute
   AuthenticatedAdminLifecycleRoute: typeof AuthenticatedAdminLifecycleRoute
   AuthenticatedAdminOrdersRoute: typeof AuthenticatedAdminOrdersRoute
   AuthenticatedAdminPricingRoute: typeof AuthenticatedAdminPricingRoute
@@ -639,6 +660,7 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminCreatorRoute: AuthenticatedAdminCreatorRoute,
   AuthenticatedAdminCrmRoute: AuthenticatedAdminCrmRoute,
   AuthenticatedAdminInfrastructureRoute: AuthenticatedAdminInfrastructureRoute,
+  AuthenticatedAdminKnowledgeRoute: AuthenticatedAdminKnowledgeRoute,
   AuthenticatedAdminLifecycleRoute: AuthenticatedAdminLifecycleRoute,
   AuthenticatedAdminOrdersRoute: AuthenticatedAdminOrdersRoute,
   AuthenticatedAdminPricingRoute: AuthenticatedAdminPricingRoute,

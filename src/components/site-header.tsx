@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { LayoutDashboard, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AuthDialog } from "@/components/auth-dialog";
-import { Brand } from "@/components/brand";
+import { HomeBrand } from "@/components/home-brand";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AnimatePresence, motion } from "@/components/motion";
 import { Button } from "@/components/ui/button";
@@ -62,9 +62,7 @@ export function SiteHeader() {
               scrolled ? "opacity-100" : "opacity-0",
             )}
           />
-          <Link to="/" className="min-w-0 mr-auto lg:mr-0" onClick={() => setOpen(false)}>
-            <Brand />
-          </Link>
+          <HomeBrand className="mr-auto lg:mr-0" onNavigate={() => setOpen(false)} />
 
           <nav
             className="mx-auto hidden items-center gap-1 text-sm font-medium lg:flex"

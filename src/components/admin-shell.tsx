@@ -14,9 +14,10 @@ import {
   Tags,
   Users,
   Wand2,
+  BookOpenText,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
-import { Brand } from "@/components/brand";
+import { HomeBrand } from "@/components/home-brand";
 import { AssistantPanel } from "@/components/assistant-panel";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,7 @@ export const adminNav = [
   { label: "Orders Ledger", to: "/admin/orders", icon: BadgeDollarSign, roles: ["owner", "partner"] },
   { label: "Verification Queue", to: "/admin/verification", icon: ClipboardCheck, roles: ["owner", "partner", "verifier"] },
   { label: "Automation Creator", to: "/admin/creator", icon: Wand2, roles: ["owner", "partner"] },
+  { label: "Knowledge Drafts", to: "/admin/knowledge", icon: BookOpenText, roles: ["owner", "partner"] },
   { label: "Automations & Transcripts", to: "/admin/automations", icon: Bot, roles: ["owner", "partner"] },
   { label: "Client CRM & Tags", to: "/admin/crm", icon: Tags, roles: ["owner", "partner"] },
   { label: "Subscription Lifecycle", to: "/admin/lifecycle", icon: Clock, roles: ["owner", "partner"] },
@@ -54,7 +56,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
         )}
       >
         <div className="mb-6 flex items-center justify-between">
-          <Brand />
+          <HomeBrand />
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen(false)}>
             <ChevronLeft />
           </Button>
