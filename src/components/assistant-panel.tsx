@@ -44,7 +44,7 @@ export function AssistantPanel() {
         <Button variant="outline" size="sm" className="hidden gap-2 sm:inline-flex">
           <Sparkles className="h-4 w-4 text-primary" />
           Ask AI
-          {!status?.configured && <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />}
+          {!status?.configured && <span className="h-1.5 w-1.5 rounded-full bg-foreground" />}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-xl rounded-3xl">
@@ -58,8 +58,8 @@ export function AssistantPanel() {
         </DialogHeader>
 
         {!status?.configured ? (
-          <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
-            <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">No OpenRouter key yet</p>
+          <div className="rounded-2xl border border-foreground/30 bg-foreground/10 p-4">
+            <p className="text-sm font-semibold text-foreground">No OpenRouter key yet</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Paste your key on the Infrastructure page and the assistant goes live for owners and partners.
             </p>

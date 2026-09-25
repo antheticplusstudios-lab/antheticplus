@@ -79,7 +79,7 @@ function VerificationCard({ payment }: { payment: Payment }) {
           <Button
             onClick={approve}
             disabled={review.isPending}
-            className="flex-1 bg-emerald-600 text-white hover:bg-emerald-600/90"
+            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
           >
             Approve payment
           </Button>

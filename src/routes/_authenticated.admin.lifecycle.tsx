@@ -108,7 +108,7 @@ function LifecyclePage() {
           empty="No automation instances yet."
           rows={rows.map((i) => {
             const left = daysRemaining(i.expires_at);
-            const tone = left < 5 ? "text-destructive" : left < 10 ? "text-amber-600 dark:text-amber-400" : "text-foreground";
+            const tone = left < 5 ? "text-destructive" : left < 10 ? "text-foreground" : "text-foreground";
             return [
               i.user_id.slice(0, 8),
               <StatusPill status={i.status} key="status" />,

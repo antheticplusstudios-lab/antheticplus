@@ -94,7 +94,7 @@ function Page() {
             {busy ? "Saving…" : "Save profile"}
           </Button>
           {profile?.profile_completed && (
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="inline-flex items-center gap-2 text-sm font-bold text-success">
               <CircleCheckBig className="h-4 w-4" />
               Profile complete
             </span>

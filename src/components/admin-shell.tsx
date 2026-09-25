@@ -19,7 +19,6 @@ import {
 import { useState, type ReactNode } from "react";
 import { HomeBrand } from "@/components/home-brand";
 import { AssistantPanel } from "@/components/assistant-panel";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser, useRole } from "@/hooks/use-portal";
 import { supabase } from "@/integrations/supabase/client";
@@ -48,7 +47,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const initial = (user?.email ?? "A").charAt(0).toUpperCase();
 
   return (
-    <div className="min-h-screen bg-muted/25">
+    <div className="min-h-screen bg-background">
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-border bg-background p-4 transition-transform lg:translate-x-0",
@@ -107,7 +106,6 @@ export function AdminShell({ children }: { children: ReactNode }) {
           </div>
           <div className="ml-auto flex items-center gap-2">
             <AssistantPanel />
-            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
